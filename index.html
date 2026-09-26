@@ -1,234 +1,328 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f8f9ff">
-  <meta name="description" content="Sketchware Neo — a community-maintained Android IDE for building real Android apps directly from your phone.">
-  <title>Sketchware Neo — Build Android apps on your phone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111014">
+  <meta name="description" content="Sketchware Neo — a community-maintained Android IDE for building and editing Android projects directly on Android.">
+  <title>Sketchware Neo — Android development, on Android</title>
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Text:wght@400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..700,0..1,0&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script>const t=localStorage.getItem('neo-theme');if(t)document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark';</script>
+  <script>
+    (() => {
+      const saved = localStorage.getItem("neo-theme");
+      const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    })();
+  </script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="#top">
-        <span class="logo"><span class="material-symbols-rounded">code_blocks</span></span>
-        <span><b>Sketchware Neo</b><small>Android IDE on your phone</small></span>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="topbar" id="topbar">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Sketchware Neo home">
+        <span class="brand-mark"><span class="material-symbols-rounded">code_blocks</span></span>
+        <span class="brand-copy">
+          <strong>Sketchware Neo</strong>
+          <small>Android IDE · on Android</small>
+        </span>
       </a>
-      <nav>
-        <a href="#features">Features</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#community">Community</a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#features">Features</a>
+        <a class="nav-link" href="#screenshots">Screens</a>
+        <a class="nav-link" href="#workflow">Workflow</a>
+        <a class="nav-link" href="#community">Community</a>
       </nav>
+
       <div class="nav-actions">
-        <a class="icon" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer" aria-label="GitHub"><span class="material-symbols-rounded">code</span></a>
-        <button class="icon" id="theme"><span class="material-symbols-rounded" id="themeIcon">dark_mode</span></button>
-        <a class="pill small" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer"><span class="material-symbols-rounded">download</span>Get Neo</a>
-        <button class="icon mobile" id="menu"><span class="material-symbols-rounded">menu</span></button>
+        <a class="nav-icon" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <span class="material-symbols-rounded">code</span>
+        </a>
+        <button class="nav-icon" id="themeToggle" type="button" aria-label="Toggle theme">
+          <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
+        </button>
+        <a class="nav-cta" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
+          <span class="material-symbols-rounded">download</span>
+          Releases
+        </a>
+        <button class="nav-icon menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <span class="material-symbols-rounded">menu</span>
+        </button>
       </div>
     </div>
-    <div class="mobileNav" id="mobileNav">
-      <a href="#features">Features</a>
-      <a href="#screenshots">Screenshots</a>
-      <a href="#workflow">Workflow</a>
-      <a href="#community">Community</a>
-      <a href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">Download Neo</a>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features <span class="material-symbols-rounded">arrow_forward</span></a>
+      <a href="#screenshots">Screens <span class="material-symbols-rounded">arrow_forward</span></a>
+      <a href="#workflow">Workflow <span class="material-symbols-rounded">arrow_forward</span></a>
+      <a href="#community">Community <span class="material-symbols-rounded">arrow_forward</span></a>
+      <a class="mobile-release" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">Open releases</a>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="glow g1"></div><div class="glow g2"></div>
-      <div class="wrap heroGrid">
-        <div class="heroCopy">
-          <div class="eyebrow"><i></i>Community-maintained · Android IDE</div>
-          <h1>Build <em>real Android apps.</em><br>Directly from your phone.</h1>
-          <p class="lead">Sketchware Neo brings source editing, Gradle, C/C++, project tools and modern Android workflows into one on-device IDE.</p>
-          <div class="actions">
-            <a class="btn primary" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer"><span class="material-symbols-rounded">download</span>Download Neo</a>
-            <a class="btn outline" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer"><span class="material-symbols-rounded">code</span>Explore GitHub</a>
+      <div class="hero-orb orb-a"></div>
+      <div class="hero-orb orb-b"></div>
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span></span>Community-maintained Android IDE</div>
+          <h1>Android development,<br><em>on Android.</em></h1>
+          <p>Sketchware Neo brings project editing, source code, Gradle, native C/C++, terminal tools and Android project utilities into one mobile development environment.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
+              <span class="material-symbols-rounded">download</span>Get the latest release
+            </a>
+            <a class="button tonal" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer">
+              <span class="material-symbols-rounded">code</span>View source
+            </a>
           </div>
-          <div class="meta">
-            <span><span class="material-symbols-rounded">smartphone</span>On-device</span>
-            <span><span class="material-symbols-rounded">terminal</span>Native toolchain</span>
-            <span><span class="material-symbols-rounded">dark_mode</span>Material 3 UI</span>
+          <div class="hero-facts">
+            <span><i class="material-symbols-rounded">smartphone</i>Built for Android</span>
+            <span><i class="material-symbols-rounded">memory</i>C/C++ + CMake</span>
+            <span><i class="material-symbols-rounded">terminal</i>Built-in terminal</span>
           </div>
         </div>
-        
-        <div class="heroVisual realHeroVisual">
-          <figure class="realPhoneShot">
+
+        <div class="hero-stage reveal delay-1">
+          <div class="hero-label"><span class="material-symbols-rounded">photo_library</span>Real Neo screenshots</div>
+          <div class="hero-device">
+            <div class="device-glow"></div>
             <img src="assets/screenshots/projects.jpg" alt="Sketchware Neo My Projects screen">
-            <figcaption><b>My Projects</b><span>Search · Create &amp; Import · Store</span></figcaption>
-          </figure>
+          </div>
+          <div class="floating-chip chip-projects"><span class="material-symbols-rounded">folder_open</span>My Projects</div>
+          <div class="floating-chip chip-native"><span class="material-symbols-rounded">memory</span>Native tools</div>
         </div>
       </div>
     </section>
 
-    <section class="proof">
-      <div class="wrap proofIn">
-        <b>What makes Neo different</b>
-        <div>
-          <span><span class="material-symbols-rounded">memory</span>Native C/C++</span>
-          <span><span class="material-symbols-rounded">build</span>Custom Gradle</span>
-          <span><span class="material-symbols-rounded">description</span>Manifest editor</span>
-          <span><span class="material-symbols-rounded">verified_user</span>R8 / ProGuard</span>
-          <span><span class="material-symbols-rounded">account_tree</span>Git workflow</span>
-          <span><span class="material-symbols-rounded">cloud</span>Cloud backup</span>
-        </div>
+    <section class="trust-strip">
+      <div class="trust-inner">
+        <span class="trust-title">Inside Neo</span>
+        <span><i class="material-symbols-rounded">code</i>Source editor</span>
+        <span><i class="material-symbols-rounded">build</i>Custom Gradle</span>
+        <span><i class="material-symbols-rounded">memory</i>C/C++ + CMake</span>
+        <span><i class="material-symbols-rounded">description</i>Manifest tools</span>
+        <span><i class="material-symbols-rounded">cloud_sync</i>Cloud backup</span>
       </div>
     </section>
 
     <section class="section" id="features">
-      <div class="wrap">
-        <div class="head center">
-          <small>THE NEO EXPERIENCE</small>
-          <h2>A developer workflow,<br><em>not just a project builder.</em></h2>
-          <p>Experience a complete development environment right on your smartphone. Write, build, and debug native workflows without compromise.</p>
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow plain">THE NEO TOOLSET</span>
+          <h2>Tools that belong<br><em>inside the project.</em></h2>
         </div>
-        
-        <div class="featureHero">
-          <div class="featureCopy">
-            <div class="featureIcon big"><span class="material-symbols-rounded">memory</span></div>
-            <small>01 · NATIVE DEVELOPMENT</small>
-            <h3>C/C++ and CMake<br>on-device.</h3>
-            <p>Use a native build path with JNI, CMake integration and project tooling—without leaving Android.</p>
-            <a href="#workflow" class="text">See the workflow <span class="material-symbols-rounded">arrow_forward</span></a>
+        <p>Neo is more than a block editor. The current project includes source editing, native development, Gradle tooling, terminal sessions and project-level utilities.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card feature-card-large reveal">
+          <div class="feature-art">
+            <img src="assets/screenshots/native-tools.jpg" alt="Sketchware Neo Native Tools screen">
           </div>
-          <div class="codePanel realFeaturePanel">
-            <img src="assets/screenshots/editor.jpg" alt="Sketchware Neo editor screen">
+          <div class="feature-content">
+            <span class="feature-num">01</span>
+            <div>
+              <span class="eyebrow plain">NATIVE DEVELOPMENT</span>
+              <h3>C/C++ and CMake</h3>
+              <p>Manage native source files, CMake and the Android NDK from the project instead of leaving the phone.</p>
+            </div>
           </div>
-        </div>
-        
-        <div class="cards">
-          <article><div class="featureIcon"><span class="material-symbols-rounded">edit_note</span></div><small>SOURCE</small><h3>Multi-language editing</h3><p>Java, Kotlin, C/C++, Groovy, CMake, JSON and Markdown in one editor experience.</p></article>
-          <article class="tonal"><div class="featureIcon"><span class="material-symbols-rounded">settings_suggest</span></div><small>BUILD</small><h3>Gradle, your way</h3><p>Edit project build files directly and keep the setup understandable and recoverable.</p></article>
-          <article><div class="featureIcon"><span class="material-symbols-rounded">policy</span></div><small>CONTROL</small><h3>Manifest editor</h3><p>Use structured manifest settings or open the raw XML when you need full control.</p></article>
-          <article><div class="featureIcon"><span class="material-symbols-rounded">deployed_code</span></div><small>RELIABILITY</small><h3>R8 / ProGuard</h3><p>Keep minification workflows close to the project with template keep-rules.</p></article>
-          <article><div class="featureIcon"><span class="material-symbols-rounded">cloud_sync</span></div><small>SAFETY</small><h3>Cloud backup</h3><p>Back up project data and recover versions instead of relying on one local copy.</p></article>
-          <article><div class="featureIcon"><span class="material-symbols-rounded">search</span></div><small>NAVIGATION</small><h3>Global search + Git</h3><p>Find content quickly and use Git as part of the on-device development loop.</p></article>
-        </div>
+        </article>
+
+        <article class="feature-card reveal delay-1">
+          <div class="feature-icon"><span class="material-symbols-rounded">edit_note</span></div>
+          <span class="eyebrow plain">SOURCE</span>
+          <h3>Multi-language editing</h3>
+          <p>Work with Java, Kotlin, C/C++, Groovy, CMake, JSON and Markdown in the source editor.</p>
+        </article>
+
+        <article class="feature-card tonal-card reveal delay-2">
+          <div class="feature-icon"><span class="material-symbols-rounded">settings</span></div>
+          <span class="eyebrow plain">BUILD</span>
+          <h3>Custom Gradle</h3>
+          <p>Edit project build files and keep the build configuration visible and recoverable.</p>
+        </article>
+
+        <article class="feature-card reveal">
+          <div class="feature-icon"><span class="material-symbols-rounded">description</span></div>
+          <span class="eyebrow plain">PROJECT</span>
+          <h3>Manifest & project tools</h3>
+          <p>Project-level Android settings stay close to the project they belong to.</p>
+        </article>
+
+        <article class="feature-card reveal delay-1">
+          <div class="feature-icon"><span class="material-symbols-rounded">cloud_sync</span></div>
+          <span class="eyebrow plain">BACKUP</span>
+          <h3>Cloud backup</h3>
+          <p>Keep project backups and recover versions without depending on a single local copy.</p>
+        </article>
       </div>
     </section>
 
-    <section class="section gallery" id="screenshots">
-      <div class="wrap">
-        <div class="head split">
-          <div><small>SEE NEO IN ACTION</small><h2>The interface is<br><em>part of the toolchain.</em></h2></div>
-          <p>Navigate effortlessly between your code, terminal, and project settings with a UI built specifically for touch and mobile productivity.</p>
+    <section class="section screenshots-section" id="screenshots">
+      <div class="section-head screenshots-head reveal">
+        <div>
+          <span class="eyebrow plain">REAL SCREENS</span>
+          <h2>See the actual<br><em>Neo interface.</em></h2>
         </div>
-        
-        <div class="m3Shots">
-          <figure class="big">
-            <img src="assets/screenshots/projects.jpg" alt="Sketchware Neo My Projects screen">
-            <figcaption>
-              <b>01</b>
-              <span><strong>My Projects</strong><small>Search, project list, Create &amp; Import and Store.</small></span>
-            </figcaption>
-          </figure>
-          <figure>
-            <img src="assets/screenshots/editor.jpg" alt="Sketchware Neo editor screen">
-            <figcaption>
-              <b>02</b>
-              <span><strong>Project editor</strong><small>View, Event, Component and Terminal tabs.</small></span>
-            </figcaption>
-          </figure>
+        <div class="carousel-controls">
+          <button id="shotPrev" aria-label="Previous screenshot"><span class="material-symbols-rounded">arrow_back</span></button>
+          <div class="carousel-count"><b id="shotCurrent">01</b><span>/</span><span id="shotTotal">07</span></div>
+          <button id="shotNext" aria-label="Next screenshot"><span class="material-symbols-rounded">arrow_forward</span></button>
         </div>
+      </div>
+
+      <div class="carousel-shell reveal">
+        <div class="carousel-track" id="screenshotTrack">
+          <article class="screen-card active">
+            <div class="screen-top"><span>01</span><b>My Projects</b><small>Project list</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/projects.jpg" alt="Sketchware Neo My Projects"></div>
+            <div class="screen-caption"><strong>Projects</strong><span>Search, create/import, project list and Store.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>02</span><b>C/C++ Manager</b><small>Native files</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/cpp-manager.jpg" alt="Sketchware Neo C C++ Manager"></div>
+            <div class="screen-caption"><strong>C/C++ Manager</strong><span>Native source files, headers and CMakeLists.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>03</span><b>Native editor</b><small>Source code</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/native-editor.jpg" alt="Sketchware Neo native source editor"></div>
+            <div class="screen-caption"><strong>Source editor</strong><span>C++ code with syntax highlighting and line numbers.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>04</span><b>Gradle Scripts</b><small>Build configuration</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/gradle-manager.jpg" alt="Sketchware Neo Gradle Scripts"></div>
+            <div class="screen-caption"><strong>Gradle Scripts</strong><span>Project files, custom Gradle and build configuration.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>05</span><b>Native Tools</b><small>Toolchain</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/native-tools.jpg" alt="Sketchware Neo Native Tools"></div>
+            <div class="screen-caption"><strong>Native Tools</strong><span>NDK, CMake and native source directory status.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>06</span><b>Terminal</b><small>Project session</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/terminal.jpg" alt="Sketchware Neo Terminal"></div>
+            <div class="screen-caption"><strong>Built-in Terminal</strong><span>Project shell with session controls and keyboard shortcuts.</span></div>
+          </article>
+
+          <article class="screen-card">
+            <div class="screen-top"><span>07</span><b>Project editor</b><small>Design workflow</small></div>
+            <div class="screen-frame"><img src="assets/screenshots/editor.jpg" alt="Sketchware Neo project editor"></div>
+            <div class="screen-caption"><strong>Project editor</strong><span>View, Event, Component and Terminal in one workspace.</span></div>
+          </article>
+        </div>
+        <div class="carousel-hint"><span class="material-symbols-rounded">swipe</span>Swipe horizontally to explore</div>
       </div>
     </section>
 
     <section class="section workflow" id="workflow">
-      <div class="wrap workflowGrid">
-        <div>
-          <div class="head"><small>A SIMPLE LOOP</small><h2>From project idea<br>to <em>APK.</em></h2><p>Neo keeps the important steps visible, so your phone can be the development environment instead of just the testing device.</p></div>
-          <div class="steps">
-            <div class="step active"><b>01</b><span><strong>Create or import</strong><small>Start a project or bring an Android Studio project into Neo.</small></span></div>
-            <div class="step"><b>02</b><span><strong>Edit & configure</strong><small>Use source editing, libraries, manifest settings and project tools.</small></span></div>
-            <div class="step"><b>03</b><span><strong>Build on-device</strong><small>Run Java/Kotlin and native workflows with Gradle and CMake support.</small></span></div>
+      <div class="workflow-grid">
+        <div class="workflow-copy reveal">
+          <span class="eyebrow plain">THE WORKFLOW</span>
+          <h2>Create. Edit.<br><em>Build.</em></h2>
+          <p>The interface keeps the project, source code, build configuration and terminal close together. The result feels more like an IDE and less like a collection of separate tools.</p>
+          <div class="workflow-steps">
+            <div class="workflow-step active"><b>01</b><div><strong>Create or import</strong><span>Start a project or bring an Android Studio project into Neo.</span></div></div>
+            <div class="workflow-step"><b>02</b><div><strong>Edit the project</strong><span>Use the visual editor, source editor, libraries and project settings.</span></div></div>
+            <div class="workflow-step"><b>03</b><div><strong>Build on-device</strong><span>Use Gradle and native tooling as part of the same project.</span></div></div>
           </div>
         </div>
-        <div class="terminalCard">
-          <div class="terminalHead"><span class="material-symbols-rounded">terminal</span><div><b>Neo Terminal</b><small>Connected session</small></div><i>● ready</i></div>
-<pre><span class="p">$</span> ./gradlew assembleDebug<br><span class="dim">&gt; Configure project :app</span><br><span class="dim">&gt; Kotlin / Java compilation</span><br><span class="dim">&gt; External native build</span><br><span class="ok">BUILD SUCCESSFUL in 28s</span><br><span class="path">app/build/outputs/apk/debug/app-debug.apk</span></pre>
-          <div class="terminalBottom"><span><span class="material-symbols-rounded">check_circle</span>Build complete</span><span>28.4s</span></div>
+
+        <div class="workflow-visual reveal delay-1">
+          <div class="workflow-card back"><img src="assets/screenshots/gradle-manager.jpg" alt=""></div>
+          <div class="workflow-card front"><img src="assets/screenshots/terminal.jpg" alt="Sketchware Neo terminal"></div>
+          <div class="workflow-badge"><span class="material-symbols-rounded">terminal</span><div><b>Terminal session</b><small>Inside the project</small></div><i></i></div>
         </div>
       </div>
     </section>
 
     <section class="section community" id="community">
-      <div class="wrap">
-        <div class="head center">
-          <small>OPEN BY DESIGN</small>
-          <h2>Built by the community.<br><em>Improved in public.</em></h2>
-          <p>Follow the project, inspect the source, grab releases and join the people building a better Android IDE experience.</p>
+      <div class="community-panel reveal">
+        <div>
+          <span class="eyebrow plain">THE PROJECT</span>
+          <h2>Follow Neo where<br><em>the work happens.</em></h2>
+          <p>Sketchware Neo is community-maintained. Source, releases, issues and ongoing development live on GitHub.</p>
         </div>
-        <div class="communityGrid">
-          <a class="communityCard primary" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer"><span class="communityIcon"><span class="material-symbols-rounded">code</span></span><span><small>SOURCE</small><h3>GitHub repository</h3><p>Browse code, issues, changes and ongoing development.</p></span><span class="arrow material-symbols-rounded">arrow_outward</span></a>
-          <a class="communityCard" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer"><span class="communityIcon"><span class="material-symbols-rounded">download</span></span><span><small>RELEASES</small><h3>Get the latest build</h3><p>Download releases and see what changed across versions.</p></span><span class="arrow material-symbols-rounded">arrow_outward</span></a>
-          <a class="communityCard" href="https://t.me/" target="_blank" rel="noreferrer"><span class="communityIcon"><span class="material-symbols-rounded">forum</span></span><span><small>COMMUNITY</small><h3>Talk with other builders</h3><p>Keep up with discussions, experiments and support.</p></span><span class="arrow material-symbols-rounded">arrow_outward</span></a>
+        <div class="community-links">
+          <a href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer">
+            <span class="material-symbols-rounded">code</span><div><b>GitHub repository</b><small>Source and project structure</small></div><span class="material-symbols-rounded arrow">arrow_outward</span>
+          </a>
+          <a href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
+            <span class="material-symbols-rounded">download</span><div><b>Releases</b><small>Published builds and versions</small></div><span class="material-symbols-rounded arrow">arrow_outward</span>
+          </a>
+          <a href="https://github.com/sketchlibx/SketchwareNeo/issues" target="_blank" rel="noreferrer">
+            <span class="material-symbols-rounded">bug_report</span><div><b>Issues</b><small>Bug reports and development</small></div><span class="material-symbols-rounded arrow">arrow_outward</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="cta">
-      <div class="wrap">
-        <div class="ctaCard">
-          <div class="rings"></div>
-          <div>
-            <small>YOUR PHONE. YOUR IDE.</small>
-            <h2>Ready to build<br><em>without leaving Android?</em></h2>
-            <p>Start with Neo and make your phone more than a testing device.</p>
-            <div class="actions">
-              <a class="btn primary" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer"><span class="material-symbols-rounded">download</span>Get Sketchware Neo</a>
-              <a class="btn textBtn" href="#top">Back to top <span class="material-symbols-rounded">arrow_upward</span></a>
-            </div>
-          </div>
-        </div>
+    <section class="final-cta">
+      <div class="cta-glow"></div>
+      <div class="cta-content reveal">
+        <span class="eyebrow">SKETCHWARE NEO</span>
+        <h2>Build from<br><em>wherever you are.</em></h2>
+        <p>Download the current release and see the real workflow on your Android device.</p>
+        <a class="button primary large" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
+          <span class="material-symbols-rounded">download</span>Open releases
+        </a>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="wrap footGrid">
-      <div class="footBrand">
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
         <a class="brand" href="#top">
-          <span class="logo"><span class="material-symbols-rounded">code_blocks</span></span>
-          <span><b>Sketchware Neo</b><small>Build Android apps on your phone</small></span>
+          <span class="brand-mark"><span class="material-symbols-rounded">code_blocks</span></span>
+          <span class="brand-copy"><strong>Sketchware Neo</strong><small>Android IDE · on Android</small></span>
         </a>
-        <p>A community-maintained Android IDE focused on real development workflows, native tooling and an on-device coding experience.</p>
+        <p>A community-maintained continuation focused on real Android project development directly from Android.</p>
+        <div class="footer-status"><span></span>Community-maintained project</div>
       </div>
-      <div>
-        <b>Product</b>
+
+      <div class="footer-column">
+        <b>Explore</b>
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#workflow">Workflow</a>
-        <a href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">Releases</a>
-      </div>
-      <div>
-        <b>Resources</b>
-        <a href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://github.com/sketchlibx/SketchwareNeo/issues" target="_blank" rel="noreferrer">Issues</a>
-        <a href="https://github.com/sketchlibx/SketchwareNeo/commits" target="_blank" rel="noreferrer">Changelog</a>
         <a href="#community">Community</a>
       </div>
-      <div>
-        <b>Explore</b>
-        <a href="#community">Join community</a>
-        <a href="https://github.com/sketchlibx/SketchwareNeo/forks" target="_blank" rel="noreferrer">Fork</a>
-        <a href="https://github.com/sketchlibx/SketchwareNeo/pulls" target="_blank" rel="noreferrer">Contribute</a>
-        <button class="footTheme" id="footTheme"><span class="material-symbols-rounded">contrast</span>Toggle theme</button>
+
+      <div class="footer-column">
+        <b>Project</b>
+        <a href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">Releases</a>
+        <a href="https://github.com/sketchlibx/SketchwareNeo/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a href="https://github.com/sketchlibx/SketchwareNeo/commits" target="_blank" rel="noreferrer">Commits</a>
+      </div>
+
+      <div class="footer-column footer-meta">
+        <b>Current line</b>
+        <div class="version">v7.0.0</div>
+        <small>Check GitHub Releases for the current published build.</small>
+        <button id="footerTheme" type="button"><span class="material-symbols-rounded">contrast</span>Switch appearance</button>
       </div>
     </div>
-    <div class="wrap footBottom">
-      <span>© 2026 Sketchware Neo · Community maintained</span>
-      <span>Built by the community</span>
+
+    <div class="footer-bottom">
+      <span>© 2026 Sketchware Neo</span>
+      <span>Built by the community · <a href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer">GitHub ↗</a></span>
     </div>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
