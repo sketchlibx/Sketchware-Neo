@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="styles.css">
   <script>
     (() => {
-      const saved = localStorage.getItem("neo-theme");
+      let saved = null;
+      try { saved = localStorage.getItem("neo-theme"); } catch (_) {}
       const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
       document.documentElement.dataset.theme = dark ? "dark" : "light";
     })();
@@ -40,13 +41,10 @@
       </nav>
 
       <div class="nav-actions">
-        <a class="nav-icon" href="https://github.com/sketchlibx/SketchwareNeo" target="_blank" rel="noreferrer" aria-label="GitHub">
-          <span class="material-symbols-rounded">code</span>
-        </a>
-        <button class="nav-icon" id="themeToggle" type="button" aria-label="Toggle theme">
+        <button class="nav-icon" id="themeToggle" type="button" aria-label="Switch to light mode">
           <span class="material-symbols-rounded" id="themeIcon">light_mode</span>
         </button>
-        <a class="nav-cta" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
+        <a class="nav-cta" aria-label="Open GitHub releases" href="https://github.com/sketchlibx/SketchwareNeo/releases" target="_blank" rel="noreferrer">
           <span class="material-symbols-rounded">download</span>
           Releases
         </a>
@@ -93,7 +91,7 @@
           <div class="hero-label"><span class="material-symbols-rounded">photo_library</span>Real Neo screenshots</div>
           <div class="hero-device">
             <div class="device-glow"></div>
-            <img src="assets/screenshots/projects.jpg" alt="Sketchware Neo My Projects screen">
+            <img data-shot="projects" src="assets/screenshots/light/projects.jpg" alt="Sketchware Neo My Projects screen">
           </div>
           <div class="floating-chip chip-projects"><span class="material-symbols-rounded">folder_open</span>My Projects</div>
           <div class="floating-chip chip-native"><span class="material-symbols-rounded">memory</span>Native tools</div>
@@ -124,7 +122,7 @@
       <div class="feature-grid">
         <article class="feature-card feature-card-large reveal">
           <div class="feature-art">
-            <img src="assets/screenshots/native-tools.jpg" alt="Sketchware Neo Native Tools screen">
+            <img data-shot="native-tools" src="assets/screenshots/light/native-tools.jpg" alt="Sketchware Neo Native Tools screen">
           </div>
           <div class="feature-content">
             <span class="feature-num">01</span>
@@ -180,50 +178,50 @@
       </div>
 
       <div class="carousel-shell reveal">
-        <div class="carousel-track" id="screenshotTrack">
+        <div class="carousel-track" id="screenshotTrack" aria-live="polite">
           <article class="screen-card active">
             <div class="screen-top"><span>01</span><b>My Projects</b><small>Project list</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/projects.jpg" alt="Sketchware Neo My Projects"></div>
+            <div class="screen-frame"><img data-shot="projects" src="assets/screenshots/light/projects.jpg" alt="Sketchware Neo My Projects"></div>
             <div class="screen-caption"><strong>Projects</strong><span>Search, create/import, project list and Store.</span></div>
           </article>
 
           <article class="screen-card">
-            <div class="screen-top"><span>02</span><b>C/C++ Manager</b><small>Native files</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/cpp-manager.jpg" alt="Sketchware Neo C C++ Manager"></div>
-            <div class="screen-caption"><strong>C/C++ Manager</strong><span>Native source files, headers and CMakeLists.</span></div>
+            <div class="screen-top"><span>02</span><b>Cloud</b><small>Project backup</small></div>
+            <div class="screen-frame"><img data-shot="cloud-manage" src="assets/screenshots/light/cloud-manage.jpg" alt="Sketchware Neo Cloud screen"></div>
+            <div class="screen-caption"><strong>Cloud</strong><span>Project backup, restore and cloud storage.</span></div>
           </article>
 
           <article class="screen-card">
             <div class="screen-top"><span>03</span><b>Native editor</b><small>Source code</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/native-editor.jpg" alt="Sketchware Neo native source editor"></div>
+            <div class="screen-frame"><img data-shot="native-editor" src="assets/screenshots/light/native-editor.jpg" alt="Sketchware Neo native source editor"></div>
             <div class="screen-caption"><strong>Source editor</strong><span>C++ code with syntax highlighting and line numbers.</span></div>
           </article>
 
           <article class="screen-card">
             <div class="screen-top"><span>04</span><b>Gradle Scripts</b><small>Build configuration</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/gradle-manager.jpg" alt="Sketchware Neo Gradle Scripts"></div>
+            <div class="screen-frame"><img data-shot="gradle-manager" src="assets/screenshots/light/gradle-manager.jpg" alt="Sketchware Neo Gradle Scripts"></div>
             <div class="screen-caption"><strong>Gradle Scripts</strong><span>Project files, custom Gradle and build configuration.</span></div>
           </article>
 
           <article class="screen-card">
             <div class="screen-top"><span>05</span><b>Native Tools</b><small>Toolchain</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/native-tools.jpg" alt="Sketchware Neo Native Tools"></div>
+            <div class="screen-frame"><img data-shot="native-tools" src="assets/screenshots/light/native-tools.jpg" alt="Sketchware Neo Native Tools"></div>
             <div class="screen-caption"><strong>Native Tools</strong><span>NDK, CMake and native source directory status.</span></div>
           </article>
 
           <article class="screen-card">
             <div class="screen-top"><span>06</span><b>Terminal</b><small>Project session</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/terminal.jpg" alt="Sketchware Neo Terminal"></div>
+            <div class="screen-frame"><img data-shot="terminal" src="assets/screenshots/light/terminal.jpg" alt="Sketchware Neo Terminal"></div>
             <div class="screen-caption"><strong>Built-in Terminal</strong><span>Project shell with session controls and keyboard shortcuts.</span></div>
           </article>
 
           <article class="screen-card">
             <div class="screen-top"><span>07</span><b>Project editor</b><small>Design workflow</small></div>
-            <div class="screen-frame"><img src="assets/screenshots/editor.jpg" alt="Sketchware Neo project editor"></div>
+            <div class="screen-frame"><img data-shot="editor" src="assets/screenshots/light/editor.jpg" alt="Sketchware Neo project editor"></div>
             <div class="screen-caption"><strong>Project editor</strong><span>View, Event, Component and Terminal in one workspace.</span></div>
           </article>
         </div>
-        <div class="carousel-hint"><span class="material-symbols-rounded">swipe</span>Swipe horizontally to explore</div>
+        <div class="carousel-hint"><span class="material-symbols-rounded">swipe</span>Swipe to explore</div>
       </div>
     </section>
 
@@ -241,8 +239,8 @@
         </div>
 
         <div class="workflow-visual reveal delay-1">
-          <div class="workflow-card back"><img src="assets/screenshots/gradle-manager.jpg" alt=""></div>
-          <div class="workflow-card front"><img src="assets/screenshots/terminal.jpg" alt="Sketchware Neo terminal"></div>
+          <div class="workflow-card back"><img data-shot="gradle-manager" src="assets/screenshots/light/gradle-manager.jpg" alt=""></div>
+          <div class="workflow-card front"><img data-shot="terminal" src="assets/screenshots/light/terminal.jpg" alt="Sketchware Neo terminal"></div>
           <div class="workflow-badge"><span class="material-symbols-rounded">terminal</span><div><b>Terminal session</b><small>Inside the project</small></div><i></i></div>
         </div>
       </div>
